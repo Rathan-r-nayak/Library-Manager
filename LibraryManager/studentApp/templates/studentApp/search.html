@@ -1,0 +1,142 @@
+{% extends 'main.html' %}
+
+<style>
+{%block style%}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    /* background-color: #8ba2cd; */
+    background-image: url('/static/bck.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover;
+}
+.div_scheme{
+    margin: 20px;
+    padding: 20px;
+    height: 200px;
+    border: 2px solid black;
+    background-color: rgb(212, 212, 212);
+    border-radius: 10px;
+}
+.schemes{
+    margin-top: 50px;
+}
+#search_bar input{
+    padding: 10px 10px;
+    width: 300px;
+    border-radius: 5px;
+}
+#search_bar button{
+    padding: 11px 15px;
+    background-color: #031a4d;
+    border:1px solid white;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#search_bar button:hover{
+    background-color: #9BA4B5;
+}
+.navbar{
+    padding: 20px;
+    display: flex;
+    width:100%;
+    background-color:#190041;
+    align-items: center;
+    color: white;
+}
+footer{
+    width: 100%;
+    height:100px;
+    background-color:#212A3E;
+    color: white;
+}
+.about{
+    display: flex;
+    justify-content: space-around;
+align-items: center;
+}
+a{
+    text-decoration: none;
+    /* color: white; */
+     margin: 3px 0;
+}
+.links{
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+align-items: center;
+}
+.copy{
+    text-align:center;
+}
+.book_det{
+    color: black;
+    font-size: medium;
+    margin-top: 20px
+    
+}
+.link_title:hover{
+    text-decoration: underline;
+}
+{%endblock style%}
+</style>
+
+
+{%block body%}
+<div class="navbar">
+    <form action="search" method="get" id="search_bar">
+        <input type="search" placeholder="Search here" name="searchQuery">
+        <button type="submit">Search</button>
+    </form>
+</div>
+
+<div class="schemes">
+    {%if book|length == 0%}
+    <p>No search results</p>
+    Your search query : <b style="color: rgb(159, 116, 6);">{{query}}</b> did not match any documents. <br>
+    Suggestions:
+    <ul>
+    <li>Make sure that all words are spelled correctly.</li>
+    <li>Try more general keywords.</li>
+   <li> Try fewer keywords.</li>
+   <li> Try different keywords.</li>
+    </li>
+    </ul>
+    {%endif%}
+
+
+
+    {%for i in book%}
+    <div class="div_scheme">
+        <a class="link_title" href="bookDetail/{{i.title}}"><h2>{{i.title}}</h2></a>
+        <hr style="margin-top: 5px;">
+        <p class="book_det">Author: {{i.author}}</p>
+        <p class="book_det">Published: {{i.pub_year}}</p>
+        <p class="book_det">Copies: {{i.copies}}</p>
+        <!-- <p>{{i.about}}</p> -->
+    </div>
+    {%endfor%}
+</div>
+<footer>
+    <div class="about">
+    <div class="links">
+        <a href="#">About us</a>
+        <a href="#">Contact us</a>
+        <a href="#">Privacy Policy</a>
+    </div>
+    <div class="links">
+        <a href="https://github.com/Rathan-r-nayak" style="color: aqua;text-decoration: underline;">Rathan Nayak</a>
+        <a href="https://github.com/Pradwin" style="color: aqua;text-decoration: underline;">Pradwin Sherigar</a>
+        <a href="https://github.com/RoystonDAlmeida" style="color: aqua;text-decoration: underline;">Royston</a>
+    </div>
+</div>
+<div class="copy">
+    &#169 CopyRight
+</div>
+</footer>
+{%endblock body%}

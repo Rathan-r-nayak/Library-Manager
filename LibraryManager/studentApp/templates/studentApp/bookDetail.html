@@ -1,0 +1,212 @@
+{% extends 'main.html' %}
+
+
+{%block font%}
+<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+{%endblock font%}
+
+<style>
+{%block style%}
+body{
+    font-family: 'Roboto';
+    background-color: #190041;
+}
+h2{
+    color: rgb(103, 100, 65);
+    font-weight: bolder;
+    font-size: 35px;
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    margin: 30px 20px;
+    background-color: #c9e6f2;
+    border-radius: 20px;
+}
+.heading{
+    display: flex;
+    justify-content: center;
+}
+p,h4{
+    margin: 30px 20px;
+    
+}
+.subHead{
+    color: darkblue;
+    font-weight: bold;
+    font-size: 30px;
+}
+.details_scheme{
+    font-size: 20px;
+}
+.scheme_name{
+    font-size: 25px;
+    color: rgb(197 20 149);
+}
+footer{
+    width: 100%;
+    height:100px;
+    background-color:#212A3E;
+    color: white;
+}
+.about{
+    display: flex;
+    justify-content: space-around;
+align-items: center;
+}
+a{
+    text-decoration: none;
+    color: white;
+    margin: 3px 0;
+}
+.links{
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+align-items: center;
+}
+.copy{
+    text-align:center;
+}
+
+
+.rec_books{
+    margin: 10px;
+    height: 360px;
+    color: aliceblue;
+    width: 340px;
+    border: 2px solid rgb(0, 255, 242);
+}
+#recommended_books{
+    margin: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.take_book {
+  position: relative;
+}
+
+#issue_book {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px
+}
+#button_issue{
+    background-color: rgb(0, 0, 255);
+    border: unset;
+    padding: 20px 40px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: aliceblue;
+}
+#button_issue:hover{
+    background-color: rgb(5, 41, 142);
+}
+
+.rec_books{
+    background-color: aliceblue;
+    border-radius: 10px;
+}
+.book_tit{
+    
+    color: rgb(0, 115, 255);
+    font-size: larger;
+    font-weight:bolder;
+    text-align: center;
+    text-decoration: underline;
+    
+}
+#recommended_books{
+    margin-left: 20px;
+    margin-right: 20px;
+    justify-content: space-between;
+
+}
+.book_det{
+    color: black;
+    font-size: medium;
+    
+}
+{%endblock style%}
+</style>
+
+
+{%block body%}
+<div class="content">
+    <div class="heading">
+        <h2>Title: {{book.title}}</h2>
+    </div>
+
+    <div class="relSchemes">
+        <p class="subHead">author</p>
+        <p class="details_scheme">{{book.author}}</p>
+    </div>
+    <div class="relSchemes">
+        <p class="subHead">Published Year</p>
+        <p class="details_scheme">{{book.pub_year}}</p>
+    </div>
+
+    <div class="relSchemes">
+        <p class="subHead">copies</p>
+        <p class="details_scheme">{{book.copies}}</p>
+    </div>
+    <div class="relSchemes">
+        <p class="subHead">summary:  </p>
+        <p class="details_scheme" style="font-size: larger;">{{book.summary}}</p>
+    </div>
+    <div class="take_book">
+        <div id="issue_book">
+            <button id="button_issue"><a href="issueBook/{{book.title}}">Issue Book</a></button>
+        </div>
+        
+    </div>
+    
+     
+     <!-- {%for i in benifit%}
+     {%if forloop.counter == 1%}
+     <p class="subHead">RELATED SCHEMES:</p>
+     {%endif%}
+    
+    </div>
+    {%endfor%} -->
+
+</div>
+
+
+<main>
+    <h2 style="margin-top:50px;text-align: center;color: aqua;">Recommended Books</h2>
+    <div id="recommended_books">
+        {%for i in rec_books%}
+        <div class="rec_books">
+            <p class="book_tit"><a class="book_tit" href="{{i.title}}"> {{i.title}}</a></p>
+            <hr>
+            <p class="book_det">Author: {{i.author}}</p>
+            <p class="book_det">Published: {{i.pub_year}}</p>
+            <p class="book_det">Copies: {{i.copies}}</p>
+        </div>
+        {%endfor%}
+    </div>
+    
+</main>
+
+
+
+<!-- <footer>
+    <div class="about">
+    <div class="links">
+        <a href="#">About us</a>
+        <a href="#">Contact us</a>
+        <a href="#">Privacy Policy</a>
+    </div>
+    <div class="links">
+        <a href="https://github.com/Rathan-r-nayak">Rathan Nayak</a>
+    </div>
+</div>
+<div class="copy">
+    &#169 CopyRight
+</div>
+</footer> -->
+
+{%endblock body%}

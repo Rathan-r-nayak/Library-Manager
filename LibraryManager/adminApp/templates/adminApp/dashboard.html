@@ -1,0 +1,142 @@
+{% extends "main.html" %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        {%block style%}
+        body{
+    background-image: url('/static/moon1.jp');
+	background-size: cover;
+}
+table{
+	font-family: 'Carter One', cursive;
+    width: 100%;
+}
+.th{
+	background-color: #12214a;
+	color: white;
+	padding: 10px;
+	/* width: 100%; */
+}
+.td{
+	padding: 5px;
+	background-color: rgba(220, 220, 220, 0.622);
+	justify-content: center;
+}
+caption{
+	background-color: #12214a;
+	color: aqua;
+	font-weight: bold;
+	padding: 10px;
+}
+
+
+
+.btn_edit_del {
+    all: unset;
+    cursor: pointer;
+}
+
+.btn_edit_del:focus {
+    outline: orange 5px auto;
+}
+.btn_addst{
+	margin-left: 5px;
+	background-color: blue;
+	color: white;
+	border: 2px solid blue;
+	border-radius: 5px;
+	padding: 10px;
+	cursor: pointer;
+}
+#btn_addst:hover{
+	background-color:rgb(4, 4, 224);
+}
+#div_btn{
+	margin-bottom: 20px;
+	display: flex;
+	justify-content: right;
+}
+
+.semBtnConatainer{
+	display: flex;
+	align-items: center;
+	justify-content:space-around;
+	flex-wrap: wrap;
+}
+
+.btn_sem{
+	margin: 30px;
+width: 196px;
+height: 130px;
+background-color: #12214a;
+color: white;
+border: 2px solid #12214a;
+border-radius: 5px;
+cursor: pointer;
+}
+a{
+	cursor: pointer;
+	all: unset;
+}
+.btn_addst{
+	margin-left: 5px;
+	background-color: blue;
+	color: white;
+	border: 2px solid blue;
+	border-radius: 5px;
+	padding: 10px;
+	cursor: pointer;
+}
+#btn_addst:hover{
+	background-color:rgb(4, 4, 224);
+}
+
+        
+    {%endblock style%}
+        </style>
+</head>
+<body>
+    {%block body%}
+    <div id="div_btn">
+        <a href="adminPage"><button id="staffadd" class="btn_addst">ADD Books</button></a>
+    </div>
+    <table>
+        <caption>USERS</caption>
+        <tr>
+            <th class="th" style="width: 25%;">Book Id</th>
+            <th class="th" style="width: 50%;">Title</th>
+            <th class="th" style="width: 20%;">copies</th>
+        </tr>
+        {%for x in books%}
+        <tr>
+            <td class="td">{{x.book_id}}</td>
+            <td class="td">{{x.title}}</td>
+            <td class="td">{{x.copies}}</td>
+            <td class="td">
+                <a href="deletedata/{{x.book_id}}">
+                    <button class="btn_edit_del"><img src="/static/delete.png" height="25px" alt=""></button>
+                </a>
+            </td>
+
+        </tr>
+        {%endfor%}
+    </table>
+    {%endblock body%}
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+

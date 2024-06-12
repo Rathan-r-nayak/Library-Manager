@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        {%block style%}
+           h2 {
+         text-align: left;
+         text-transform: uppercase;
+         letter-spacing: 3px;
+         font-size: 3.2em;
+         line-height: 48px;
+         padding-bottom: 48px;
+         color: #5543ca;
+         background: #5543ca;
+         background: -moz-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
+         background: -webkit-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
+         background: linear-gradient(to right,#f4524d  0%,#5543ca  100%) !important;
+         -webkit-background-clip: text !important;
+         -webkit-text-fill-color: transparent !important;
+       }
+            .contact-form .form-field {
+         position: relative;
+         margin: 35px 0;
+        
+         
+       }
+       .child{
+        position: relative;
+        display:inline;
+        float:right;
+        margin-right: 400px;
+
+       }
+       .contact-form .input-text {
+         display: block;
+         width: 100%;
+         height: 36px;
+         border-width: 0 0 2px 0;
+         border-color: #5543ca;
+         font-size: 16px;
+         line-height: 26px;
+         font-weight: 400;
+        
+       }
+       .contact-form .input-text:focus {
+         outline: none;
+       }
+       .contact-form .input-text:focus + .label,
+       .contact-form .input-text.not-empty + .label {
+       
+                transform: translateY(-28px);
+                 /*transform: translateY(-24px);*/
+       }
+       .contact-form .label {
+         position: absolute;
+         left: 2px;
+         bottom: 25px;
+         font-size: 18px;
+         line-height: 26px;
+         font-weight: 400;
+         color: #5543ca;
+         cursor: text;
+         transition: -webkit-transform .2s ease-in-out;
+         transition: transform .2s ease-in-out;
+         transition: transform .2s ease-in-out,
+         -webkit-transform .2s ease-in-out;
+       }
+       .contact-form .print-btn {
+         display: inline-block;
+         background-color: #000;
+         background-image: linear-gradient(125deg,#a72879,#064497);
+         color: #fff;
+         text-transform: uppercase;
+         letter-spacing: 2px;
+         font-size: 16px;
+         padding: 8px 16px;
+         border: none;
+         width:200px;
+         cursor: pointer;
+         float:right;
+         right:0;
+       }
+       
+       .right_1{
+                float: right;
+            }
+            {%endblock style%}
+           
+        </style>
+    </head>
+    <body>
+        {%block body%}
+        <h3 style="font-size:xxx-large">Book Details:</h3>
+        <form class="contact-form row" action="bookInput" method="get">
+            <!-- <h2>Book Detail:</h2><br><br> -->
+            <!-- <h2>Book Details:</h2> -->
+            <br><br>
+            <div class="form-field col-lg-6">
+                <label class="label" for="title">Title : <span style="color: brown;font-size: larger;">{{books.title}}</span></label>
+            </div>
+
+            
+            <br>
+            <div class="form-field col-lg-6">
+                <label class="label" for="user_id">Book Id: <span style="color: brown;font-size: larger;">{{books.book_id}}</span></label>
+            </div>
+        
+            <div class="child">
+                <label class="label" for="author">Author: <span style="color: brown;font-size: larger;">{{books.author}}</span></label>
+             </div>
+             <br>
+            <div class="form-field col-lg-6 ">
+                <label class="label" for="pub_year">Published Year: <span style="color: brown;font-size: larger;">{{books.pub_year}}</span></label>
+               
+            </div>
+            <br><br>
+            <h3 style="font-size:xxx-large">User Details</h3>
+
+            <!-- <div class="form-field col-lg-6">
+                <label class="label" for="card">Card Num : <span style="color: brown;font-size: larger;">{{lending.card_num}}</span></label>
+             </div> -->
+            <br>
+             <br>
+             <div class="form-field col-lg-6 ">
+               <label class="label" for="due_date">First Name : <span style="color: brown;font-size: larger;">{{auth.first_name}}</span></label>
+           </div>
+           <br>
+           <div class="form-field col-lg-6 ">
+             <label class="label" for="due_date">Last Name : <span style="color: brown;font-size: larger;">{{auth.last_name}}</span></label>
+         </div>
+           <br>
+             <div class="form-field col-lg-6 ">
+               <label class="label" for="due_date">User Name : <span style="color: brown;font-size: larger;">{{uname}}</span></label>
+           </div>
+
+           <br>
+            <div class="form-field col-lg-6 ">
+                <label class="label" for="date_out">Date Out : <span style="color: brown;font-size: larger;">{{lending.date_out}}</span></label>
+            </div>
+            <br>
+            <div class="form-field col-lg-6 ">
+                <label class="label" for="due_date">Due Date : <span style="color: brown;font-size: larger;">{{lending.due_date}}</span></label>
+            </div>
+
+            <div class="right_1">
+                <!-- <input class="print-btn" type="print" value="Print" onClick="window.print()"> -->
+                <button class="print-btn" type="print" onClick="window.print()">Print</button>
+             </div>
+        </form>
+        {%endblock body%}
+    </body>
+   
+</html>

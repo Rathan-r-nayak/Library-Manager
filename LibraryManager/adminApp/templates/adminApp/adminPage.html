@@ -1,0 +1,205 @@
+{% extends 'main.html' %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   {%block links%}
+   <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   {%endblock links%}
+   <style>
+      {%block style%}
+
+      .Information{
+         max-width: 800px;
+         margin: 50px auto;
+         position: relative;
+       
+       }
+       .Information .title {
+         text-align: center;
+         text-transform: uppercase;
+         letter-spacing: 3px;
+         font-size: 3.2em;
+         line-height: 48px;
+         padding-bottom: 48px;
+         color: #5543ca;
+         background: #5543ca;
+         background: -moz-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
+         background: -webkit-linear-gradient(left,#f4524d  0%,#5543ca 100%) !important;
+         background: linear-gradient(to right,#f4524d  0%,#5543ca  100%) !important;
+         -webkit-background-clip: text !important;
+         -webkit-text-fill-color: transparent !important;
+       }
+       
+       .contact-form .form-field {
+         position: relative;
+         margin: 35px 0;
+       }
+       .contact-form .input-text {
+         display: block;
+         width: 100%;
+         height: 36px;
+         border-width: 0 0 2px 0;
+         border-color: #5543ca;
+         font-size: 16px;
+         line-height: 26px;
+         font-weight: 400;
+        
+       }
+       .contact-form .input-text:focus {
+         outline: none;
+       }
+       .contact-form .input-text:focus + .label,
+       .contact-form .input-text.not-empty + .label {
+       
+                transform: translateY(-28px);
+                 /*transform: translateY(-24px);*/
+       }
+       .contact-form .label {
+         position: absolute;
+         left: 2px;
+         bottom: 25px;
+         font-size: 18px;
+         line-height: 26px;
+         font-weight: 400;
+         color: #5543ca;
+         cursor: text;
+         transition: -webkit-transform .2s ease-in-out;
+         transition: transform .2s ease-in-out;
+         transition: transform .2s ease-in-out,
+         -webkit-transform .2s ease-in-out;
+       }
+       .contact-form .submit-btn {
+         display: inline-block;
+         background-color: #000;
+         background-image: linear-gradient(125deg,#a72879,#064497);
+         color: #fff;
+         text-transform: uppercase;
+         letter-spacing: 2px;
+         font-size: 16px;
+         padding: 8px 16px;
+         border: none;
+         width:200px;
+         cursor: pointer;
+       }
+       .img_choose{
+        cursor: pointer;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border-radius: 5px;
+        border: unset;
+        padding: 10px;
+       }
+       
+      {%endblock style%}
+      </style>
+</head>
+<body>
+{%block body%}
+      <section class="Information">
+         <!--create form action to another page to pass information-->
+         <h1 class="title">Enter the Book Information</h1>
+         
+         
+         <form class="contact-form row" action="bookInput" method="post">
+            {% csrf_token %}
+            <h4>Publisher Information</h4>
+            <div class="form-field col-lg-6 ">
+               <input id="PublisherYear" name="pub_year" class="input-text js-input" type="text" required>
+               <label class="label" for="pub_year">Published Year</label>
+            </div>
+            
+         <h4>Book Information</h4>
+         <!-- <div class="form-field col-lg-6">
+               <input id="BookId" name="bookid" class="input-text js-input" type="text" >
+               <label class="label" for="bookid">BookId</label>
+            </div> -->
+            <div class="form-field col-lg-6 ">
+               <input id="title" name="title" class="input-text js-input" type="text" required>
+               <label class="label" for="title">Title</label>
+            </div>
+
+            </div>
+            
+         <h4>Author Information</h4>
+            <div class="form-field col-lg-6">
+               <input id="AuthorName" name="author" class="input-text js-input" type="text" required>
+               <label class="label" for="author">AuthorName</label>
+            </div>
+         <h4>Book Copies</h4>
+            <div class="form-field col-lg-6">
+               <input id="No_of_copies" name="copies" class="input-text js-input" type="text" required>
+               <label class="label" for="copies">No Of Copies</label>
+            </div>
+            
+            <!-- <div class="form-field col-lg-12">
+               <label for="summary">Upload the summary page of the book:</label>
+         <input type="file" id="summary" name="summary"><br><br> -->
+            
+         <div style="color: #a72879;" class="converter-container">
+            <p style="font-size:large;font-weight: bold;">Image to Text Converter</p>
+            <input type="file" id="image-input" class="img_choose">
+            <button class="img_choose" id="convert-button" >Convert</button>
+          </div>
+          <div>
+            <textarea id="demo" name="summary_text" cols="110" rows="10" required></textarea>
+          </div>
+          <div class="form-field col-lg-12">
+            <input class="submit-btn" type="submit" value="Submit">
+         </div>
+         </form>
+      </section>
+{%endblock body%}
+</body>
+
+<script>
+{%block script%}
+const imageInput = document.getElementById('image-input');
+    const convertButton = document.getElementById('convert-button');
+
+    // Variable to store the converted text
+    let convertedText = '';
+
+    // Function to convert image to text using OCR API
+    // function imgToText() {
+      const convertImageToText = async () => {
+
+      // Get the selected image file
+      const file = imageInput.files[0];
+
+      // Create a FormData object and append the image file
+      const formData = new FormData();
+      formData.append('image', file);
+
+      // Make an HTTP POST request to the OCR API endpoint
+      const response = await fetch('https://api.ocr.space/parse/image', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          // Replace 'YOUR_API_KEY' with your actual API key
+          'apikey': 'K82219942988957'
+        }
+      });
+
+      // Parse the response as JSON
+      const data = await response.json();
+
+      // Extract the converted text from the response
+      convertedText = data.ParsedResults[0].ParsedText;
+
+      console.log(convertedText); // Display the converted text in the console
+      // document.getElementById('demo').setAttribute('value', convertedText);
+      var x = document.getElementById('demo');
+        x.value = convertedText;
+    };
+
+    // Add an event listener to the convert button
+    convertButton.addEventListener('click', convertImageToText);
+{%endblock script%}
+</script>
+</html>
